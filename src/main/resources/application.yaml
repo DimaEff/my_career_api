@@ -1,5 +1,7 @@
 server:
   port: ${PORT}
+  servlet:
+    context-path: /${my_career.api_prefix}/${my_career.api_version}/
 
 my_career:
   api_prefix: ${API_PREFIX}
