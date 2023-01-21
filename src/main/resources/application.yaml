@@ -1,0 +1,6 @@
+server:
+  port: ${PORT}
+
+my_career:
+  api_prefix: ${API_PREFIX}
+  api_version: ${API_VERSION}
