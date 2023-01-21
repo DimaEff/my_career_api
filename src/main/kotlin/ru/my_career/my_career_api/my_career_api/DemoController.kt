@@ -1,14 +1,15 @@
 package ru.my_career.my_career_api.my_career_api
 
-import org.springframework.beans.factory.annotation.Value
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
+import ru.my_career.my_career_api.my_career_api.config.EnvVariables
 
 @RestController
-class DemoController(
-    @Value("\${my_career.api_prefix}") val apiPrefix: String,
-    @Value("\${my_career.api_version}") val apiVersion: String
-) {
+class DemoController {
+    @Autowired
+    lateinit var envVariables: EnvVariables
+
     @GetMapping("/test")
-    fun test() = "$apiPrefix/$apiVersion"
+    fun test() = "${envVariables.apiPrefix}/${envVariables.apiVersion}"
 }
