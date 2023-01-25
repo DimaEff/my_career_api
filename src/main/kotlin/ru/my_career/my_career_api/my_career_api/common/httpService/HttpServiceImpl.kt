@@ -6,10 +6,12 @@ import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
 import kotlinx.serialization.json.*
+import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
 class HttpServiceImpl: HttpService {
+    private val logger = LoggerFactory.getLogger(javaClass)
     private val client = HttpClient.newBuilder().build();
     private val json = Json { ignoreUnknownKeys = true }
 
@@ -96,10 +98,13 @@ class HttpServiceImpl: HttpService {
     }
 
     private fun sendRequest(request: HttpRequest): HttpResponse<String>? {
+        logger.info("Send request")
         return try {
             val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+            logger.info("Success request")
             response
         } catch (e: java.io.IOException) {
+            logger.warn("Failed request", e)
             null
         }
     }
