@@ -71,6 +71,18 @@ class HttpServiceImpl: HttpService {
         return formateResponse(response, requestParams.serializer)
     }
 
+    private fun sendRequest(request: HttpRequest): HttpResponse<String>? {
+        logger.info("Send request")
+        return try {
+            val response = client.send(request, HttpResponse.BodyHandlers.ofString())
+            logger.info("Success request")
+            response
+        } catch (e: java.io.IOException) {
+            logger.warn("Failed request", e)
+            null
+        }
+    }
+
     private fun getUriWithQuery(url: String, queryParams: QueryParams?): URI {
         var queryParamsString = ""
         if (queryParams != null) {
@@ -95,17 +107,5 @@ class HttpServiceImpl: HttpService {
         }
 
         return json.decodeFromString(serializer, stringBody)
-    }
-
-    private fun sendRequest(request: HttpRequest): HttpResponse<String>? {
-        logger.info("Send request")
-        return try {
-            val response = client.send(request, HttpResponse.BodyHandlers.ofString())
-            logger.info("Success request")
-            response
-        } catch (e: java.io.IOException) {
-            logger.warn("Failed request", e)
-            null
-        }
     }
 }

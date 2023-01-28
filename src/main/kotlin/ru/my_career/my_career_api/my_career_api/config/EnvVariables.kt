@@ -10,4 +10,13 @@ class EnvVariables {
 
     @Value("\${my_career.api_version}")
     lateinit var apiVersion: String
+
+    @Value("\${my_career.sms_aero.url}")
+    lateinit var aeroUrl: String
+
+    @Value("\${my_career.sms_aero.email}")
+    lateinit var aeroEmail: String
+
+    @Value("\${my_career.sms_aero.api_key}")
+    lateinit var aeroApiKey: String
 }

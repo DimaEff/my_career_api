@@ -6,3 +6,8 @@ server:
 my_career:
   api_prefix: ${API_PREFIX}
   api_version: ${API_VERSION}
+
+  sms_aero:
+    url: ${AERO_SMS_URL}
+    email: ${AERO_EMAIL}
+    api_key: ${AERO_API_KEY}
