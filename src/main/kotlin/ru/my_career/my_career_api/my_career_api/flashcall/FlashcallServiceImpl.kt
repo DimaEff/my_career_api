@@ -33,7 +33,8 @@ class FlashcallServiceImpl(
             )
         )
 
-        val responseStatus = if (aeroResponse?.success == null || !aeroResponse.success) ResponseStatus.FAILED else ResponseStatus.SUCCESS
+        val responseStatus =
+            if (aeroResponse?.success == null || !aeroResponse.success) ResponseStatus.FAILED else ResponseStatus.SUCCESS
 
         return ApiResponse(responseStatus, aeroResponse?.data)
     }
@@ -45,6 +46,10 @@ class FlashcallServiceImpl(
         return mapOf("Authorization" to "Basic $authBase64")
     }
 
-    private fun getCallQueryParams(call: CallDto): Map<String, String> =
-        mapOf("phone" to "${call.countryCode}${call.phoneNumber}", "code" to call.code)
+    private fun getCallQueryParams(call: CallDto): Map<String, String> {
+        val countryCode = CountryCode.valueOf(call.countryName).code.toString()
+        println(countryCode)
+
+        return mapOf("phone" to "${countryCode}${call.phoneNumber}", "code" to call.code)
+    }
 }
