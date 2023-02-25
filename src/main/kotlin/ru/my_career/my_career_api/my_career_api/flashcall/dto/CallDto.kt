@@ -1,7 +1,7 @@
 package ru.my_career.my_career_api.my_career_api.flashcall.dto
 
 import jakarta.validation.constraints.Size
-import ru.my_career.my_career_api.my_career_api.common.validators.ValueOfEnum.ValueOfEnum
+import ru.my_career.my_career_api.my_career_api.common.validators.value_of_enum.ValueOfEnum
 import ru.my_career.my_career_api.my_career_api.flashcall.CODE_SIZE
 import ru.my_career.my_career_api.my_career_api.flashcall.CountryCode
 import ru.my_career.my_career_api.my_career_api.flashcall.PHONE_NUMBER_SIZE

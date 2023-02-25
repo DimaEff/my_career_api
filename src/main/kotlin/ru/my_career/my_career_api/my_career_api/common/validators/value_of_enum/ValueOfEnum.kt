@@ -1,10 +1,8 @@
-package ru.my_career.my_career_api.my_career_api.common.validators.ValueOfEnum
+package ru.my_career.my_career_api.my_career_api.common.validators.value_of_enum
 
 import jakarta.validation.Constraint
 import jakarta.validation.Payload
 import kotlin.reflect.KClass
-
-const val VALUE_OF_ENUM_MESSAGE = "The value must be one of the enum`s values:"
 
 @Target(
     AnnotationTarget.FIELD,
@@ -14,7 +12,7 @@ const val VALUE_OF_ENUM_MESSAGE = "The value must be one of the enum`s values:"
 @Constraint(validatedBy = [ValueOfEnumValidator::class])
 annotation class ValueOfEnum(
     val enumClass: KClass<out Enum<*>>,
-    val message: String = VALUE_OF_ENUM_MESSAGE,
+    val message: String = "The value must be one of the enum`s values",
     val groups: Array<KClass<*>> = [],
     val payload: Array<KClass<out Payload>> = []
 )

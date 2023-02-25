@@ -1,4 +1,4 @@
-package ru.my_career.my_career_api.my_career_api.common.validators.ValueOfEnum
+package ru.my_career.my_career_api.my_career_api.common.validators.value_of_enum
 
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
@@ -13,7 +13,7 @@ class ValueOfEnumValidator : ConstraintValidator<ValueOfEnum, String?> {
 
     override fun isValid(value: String?, context: ConstraintValidatorContext): Boolean {
         context.disableDefaultConstraintViolation()
-        context.buildConstraintViolationWithTemplate("$VALUE_OF_ENUM_MESSAGE ${acceptedValues.toString()}")
+        context.buildConstraintViolationWithTemplate("The value must be one of the: ${acceptedValues.toString()}").addConstraintViolation()
 
         return acceptedValues?.contains(value) ?: false
     }
