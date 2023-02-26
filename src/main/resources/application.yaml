@@ -6,7 +6,7 @@ spring:
       password: example
       database: connection1
       port: 27017
-      host:  localhost
+      host: localhost
 
 server:
   port: ${PORT}

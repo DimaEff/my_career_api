@@ -1,4 +1,4 @@
-package ru.my_career.my_career_api.my_career_api.flashcall.dto
+package ru.my_career.my_career_api.my_career_api.common.services.flashcall.dto
 
 import kotlinx.serialization.Serializable
 

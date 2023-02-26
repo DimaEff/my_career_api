@@ -1,15 +1,12 @@
-package ru.my_career.my_career_api.my_career_api.flashcall
+package ru.my_career.my_career_api.my_career_api.common.services.flashcall
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import ru.my_career.my_career_api.my_career_api.common.entities.ApiResponse
-import ru.my_career.my_career_api.my_career_api.common.entities.ResponseStatus
-import ru.my_career.my_career_api.my_career_api.common.httpService.HttpService
-import ru.my_career.my_career_api.my_career_api.common.httpService.RequestParams
+import ru.my_career.my_career_api.my_career_api.common.services.http.HttpService
+import ru.my_career.my_career_api.my_career_api.common.services.http.RequestParams
 import ru.my_career.my_career_api.my_career_api.config.EnvVariables
-import ru.my_career.my_career_api.my_career_api.flashcall.dto.AeroSmsResponseDto
-import ru.my_career.my_career_api.my_career_api.flashcall.dto.AeroSmsResponseDtoData
-import ru.my_career.my_career_api.my_career_api.flashcall.dto.CallDto
+import ru.my_career.my_career_api.my_career_api.common.services.flashcall.dto.AeroSmsResponseDto
+import ru.my_career.my_career_api.my_career_api.common.services.flashcall.dto.CallDto
 import java.util.*
 
 @Service
@@ -20,23 +17,18 @@ class FlashcallServiceImpl(
     @Autowired
     lateinit var envVariables: EnvVariables
 
-    override fun call(call: CallDto): ApiResponse<AeroSmsResponseDtoData> {
+    override fun call(call: CallDto): AeroSmsResponseDto {
         val authBase64Headers = getAuthorisationHeader()
         val callQueryParams = getCallQueryParams(call)
 
-        val aeroResponse = httpService.get(
+        return httpService.get(
             RequestParams(
                 url = "${envVariables.aeroUrl}flashcall/send",
                 headers = authBase64Headers,
                 queryParams = callQueryParams,
                 serializer = AeroSmsResponseDto.serializer(),
             )
-        )
-
-        val responseStatus =
-            if (aeroResponse?.success == null || !aeroResponse.success) ResponseStatus.FAILED else ResponseStatus.SUCCESS
-
-        return ApiResponse(responseStatus, aeroResponse?.data)
+        ) ?: AeroSmsResponseDto(success = false, message = "Failure call request", data = null)
     }
 
     private fun getAuthorisationHeader(): Map<String, String> {

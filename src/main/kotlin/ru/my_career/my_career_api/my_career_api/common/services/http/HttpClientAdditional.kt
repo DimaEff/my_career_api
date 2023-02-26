@@ -1,4 +1,4 @@
-package ru.my_career.my_career_api.my_career_api.common.httpService
+package ru.my_career.my_career_api.my_career_api.common.services.http
 
 import java.net.http.HttpRequest
 

@@ -1,4 +1,4 @@
-package ru.my_career.my_career_api.my_career_api.common.validators.OneOf
+package ru.my_career.my_career_api.my_career_api.common.validators.one_of
 
 import jakarta.validation.Constraint
 import jakarta.validation.Payload
