@@ -9,15 +9,18 @@ spring:
       host: localhost
 
 server:
-  port: ${PORT}
+#  port: ${PORT}
+#  servlet:
+#    context-path: /${my_career.api_prefix}/${my_career.api_version}/
+  port: 8080
   servlet:
     context-path: /${my_career.api_prefix}/${my_career.api_version}/
 
 my_career:
-  api_prefix: ${API_PREFIX}
-  api_version: ${API_VERSION}
+  api_prefix: api
+  api_version: 1.0
 
   sms_aero:
-    url: ${AERO_SMS_URL}
-    email: ${AERO_EMAIL}
-    api_key: ${AERO_API_KEY}
+    url: https://gate.smsaero.ru/v2/
+    email: dmitry.fominenkov@gmail.com
+    api_key: L9aresl57pue1O3THkUlMXqyyiUV
