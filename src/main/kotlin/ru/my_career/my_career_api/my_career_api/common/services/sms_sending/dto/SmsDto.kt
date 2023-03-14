@@ -1,10 +1,10 @@
-package ru.my_career.my_career_api.my_career_api.common.services.flashcall.dto
+package ru.my_career.my_career_api.my_career_api.common.services.sms_sending.dto
 
 import jakarta.validation.constraints.Size
 import ru.my_career.my_career_api.my_career_api.common.validators.value_of_enum.ValueOfEnum
-import ru.my_career.my_career_api.my_career_api.common.services.flashcall.CODE_SIZE
-import ru.my_career.my_career_api.my_career_api.common.services.flashcall.CountryCode
-import ru.my_career.my_career_api.my_career_api.common.services.flashcall.PHONE_NUMBER_SIZE
+import ru.my_career.my_career_api.my_career_api.common.services.sms_sending.CODE_SIZE
+import ru.my_career.my_career_api.my_career_api.common.services.sms_sending.CountryCode
+import ru.my_career.my_career_api.my_career_api.common.services.sms_sending.PHONE_NUMBER_SIZE
 
 open class PhoneNumberDto(
     @field:ValueOfEnum(enumClass = CountryCode::class)
@@ -16,7 +16,7 @@ open class PhoneNumberDto(
     fun getNumberAsString(): String = "${CountryCode.valueOf(countryName).code}$phoneNumber"
 }
 
-class CallDto(
+class SmsDto(
     countryName: String,
     phoneNumber: String,
 

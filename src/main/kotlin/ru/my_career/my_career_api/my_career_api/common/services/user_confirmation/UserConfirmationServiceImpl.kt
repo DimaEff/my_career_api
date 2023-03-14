@@ -2,10 +2,10 @@ package ru.my_career.my_career_api.my_career_api.common.services.user_confirmati
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
-import ru.my_career.my_career_api.my_career_api.common.services.flashcall.FlashcallService
-import ru.my_career.my_career_api.my_career_api.common.services.flashcall.dto.AeroSmsResponseDto
-import ru.my_career.my_career_api.my_career_api.common.services.flashcall.dto.CallDto
-import ru.my_career.my_career_api.my_career_api.common.services.flashcall.dto.PhoneNumberDto
+import ru.my_career.my_career_api.my_career_api.common.services.sms_sending.SmsService
+import ru.my_career.my_career_api.my_career_api.common.services.sms_sending.dto.AeroSmsResponseDto
+import ru.my_career.my_career_api.my_career_api.common.services.sms_sending.dto.SmsDto
+import ru.my_career.my_career_api.my_career_api.common.services.sms_sending.dto.PhoneNumberDto
 import ru.my_career.my_career_api.my_career_api.common.services.user_confirmation.dto.CheckResultDto
 import ru.my_career.my_career_api.my_career_api.common.services.user_confirmation.dto.CheckStatus
 import ru.my_career.my_career_api.my_career_api.common.services.user_confirmation.models.Confirmation
@@ -13,7 +13,7 @@ import ru.my_career.my_career_api.my_career_api.common.services.user_confirmatio
 @Service
 class UserConfirmationServiceImpl(
     @Autowired val confirmationRepository: ConfirmationRepository,
-    val flashcallService: FlashcallService
+    val smsService: SmsService
 ) : UserConfirmationService {
     public override fun sendConfirmationByFlashcall(phoneNumberDto: PhoneNumberDto): AeroSmsResponseDto {
         val phoneNumber = phoneNumberDto.getNumberAsString()
@@ -21,8 +21,8 @@ class UserConfirmationServiceImpl(
 
         addConfirmation(Confirmation(phoneNumber, confirmationCode))
 
-        return this.flashcallService.call(
-            CallDto(
+        return this.smsService.sendSms(
+            SmsDto(
                 phoneNumberDto.countryName,
                 phoneNumberDto.phoneNumber,
                 confirmationCode
@@ -30,8 +30,8 @@ class UserConfirmationServiceImpl(
         )
     }
 
-    public override fun checkCode(callDto: CallDto): CheckResultDto {
-        val id = callDto.getNumberAsString()
+    public override fun checkCode(smsDto: SmsDto): CheckResultDto {
+        val id = smsDto.getNumberAsString()
 
         val confirmationRes = findById(id)
 
@@ -39,7 +39,7 @@ class UserConfirmationServiceImpl(
             CheckStatus.INVALID_PHONE_NUMBER
         } else {
             val confirmation = confirmationRes.get()
-            if (confirmation.code == callDto.code) CheckStatus.SUCCESS else CheckStatus.INVALID_CODE
+            if (confirmation.code == smsDto.code) CheckStatus.SUCCESS else CheckStatus.INVALID_CODE
         }
 
         if (status === CheckStatus.SUCCESS) {

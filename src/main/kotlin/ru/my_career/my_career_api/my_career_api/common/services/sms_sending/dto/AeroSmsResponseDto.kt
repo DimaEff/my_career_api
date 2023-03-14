@@ -1,4 +1,4 @@
-package ru.my_career.my_career_api.my_career_api.common.services.flashcall.dto
+package ru.my_career.my_career_api.my_career_api.common.services.sms_sending.dto
 
 import kotlinx.serialization.Serializable
 
@@ -12,10 +12,12 @@ data class AeroSmsResponseDto(
 @Serializable
 data class AeroSmsResponseDtoData(
     val id: Int,
+    val from: String,
+    val number: String,
+    val text: String,
     val status: Int,
-    val code: String,
-    val phone: String,
-    val cost: String,
-    val timeCreate: Long,
-    val timeUpdate: Long,
+    val extendStatus: String,
+    val channel: String,
+    val dateCreate: Int,
+    val dateSend: Int,
 )
