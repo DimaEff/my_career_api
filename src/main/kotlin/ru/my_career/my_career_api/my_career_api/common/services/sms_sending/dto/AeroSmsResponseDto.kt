@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AeroSmsResponseDto(
     val success: Boolean,
-    val data: AeroSmsResponseDtoData?,
-    val message: String?
+    val data: AeroSmsResponseDtoData? = null,
+    val message: String? = null
 )
 
 @Serializable

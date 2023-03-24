@@ -3,10 +3,8 @@ package ru.my_career.my_career_api.my_career_api.common.services.user_confirmati
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import org.springframework.data.mongodb.core.mapping.Field
-import org.springframework.stereotype.Component
 
-//@Component
-@Document("confirmation")
+@Document("confirmations")
 data class Confirmation(
     @Id
     val id: String,

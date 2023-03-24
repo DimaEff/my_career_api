@@ -28,7 +28,7 @@ class SmsServiceImpl(
                 queryParams = callQueryParams,
                 serializer = AeroSmsResponseDto.serializer(),
             )
-        ) ?: AeroSmsResponseDto(success = false, message = "Failure sms sending", data = null)
+        ) ?: AeroSmsResponseDto(success = false, message = "Failure sms sending")
     }
 
     private fun getAuthorisationHeader(): Map<String, String> {

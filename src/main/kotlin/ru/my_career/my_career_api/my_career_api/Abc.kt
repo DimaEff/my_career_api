@@ -1,6 +1,8 @@
 package ru.my_career.my_career_api.my_career_api
 
+import jakarta.validation.Valid
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -13,9 +15,12 @@ class Abc(
     @Autowired
     val userConfirmationService: UserConfirmationService
 ) {
-    @PostMapping("/confirmation_by_flashcall")
-    fun sendConfirmationByFlashcall(@RequestBody phoneNumberDto: PhoneNumberDto) = userConfirmationService.sendConfirmationByFlashcall(phoneNumberDto)
+    @GetMapping("/say_hi")
+    fun sayHi(): String = "Hi!"
+
+    @PostMapping("/confirmation_by_sms")
+    fun sendConfirmationByFlashcall(@Valid @RequestBody phoneNumberDto: PhoneNumberDto) = userConfirmationService.sendConfirmationByFlashcall(phoneNumberDto)
 
     @PostMapping("/check_confirmation")
-    fun checkConfirmation(@RequestBody smsDto: SmsDto) = userConfirmationService.checkCode(smsDto)
+    fun checkConfirmation(@Valid @RequestBody smsDto: SmsDto) = userConfirmationService.checkCode(smsDto)
 }
