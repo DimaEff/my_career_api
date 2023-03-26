@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Field
 @Document("confirmations")
 data class Confirmation(
     @Id
-    val id: String,
+    val _id: String,
 
     @Field(name = "code")
     val code: String,
