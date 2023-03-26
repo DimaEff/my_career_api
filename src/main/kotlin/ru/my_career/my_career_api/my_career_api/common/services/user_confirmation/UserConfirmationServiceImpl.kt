@@ -19,7 +19,7 @@ class UserConfirmationServiceImpl(
         val phoneNumber = phoneNumberDto.getNumberAsString()
         val confirmationCode = generate4DigitsConfirmationCode()
 
-        addConfirmation(Confirmation(phoneNumber, confirmationCode))
+        confirmationRepository.save(Confirmation(phoneNumber, confirmationCode))
 
         return this.smsService.sendSms(
             SmsDto(
@@ -50,8 +50,6 @@ class UserConfirmationServiceImpl(
     }
 
     private fun findById(id: String) = confirmationRepository.findById(id)
-
-    private fun addConfirmation(confirmation: Confirmation): Confirmation = confirmationRepository.save(confirmation)
 
     private fun generate4DigitsConfirmationCode(): String = ((Math.random() * 9000).toInt() + 1000).toString()
 }
