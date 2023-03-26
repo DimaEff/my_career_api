@@ -15,6 +15,7 @@ class ValueOfEnumValidator : ConstraintValidator<ValueOfEnum, String?> {
         context.disableDefaultConstraintViolation()
         context.buildConstraintViolationWithTemplate("The value must be one of the: ${acceptedValues.toString()}").addConstraintViolation()
 
-        return acceptedValues?.contains(value) ?: false
+        // if value == null is valid because we have @NonNullable annotation
+        return value == null || acceptedValues?.contains(value) ?: false
     }
 }
