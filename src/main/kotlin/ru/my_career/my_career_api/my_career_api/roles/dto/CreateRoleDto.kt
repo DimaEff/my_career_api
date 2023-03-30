@@ -1,18 +1,18 @@
 package ru.my_career.my_career_api.my_career_api.roles.dto
 
 import jakarta.annotation.Nullable
-import ru.my_career.my_career_api.my_career_api.common.validators.title.Description
-import ru.my_career.my_career_api.my_career_api.common.validators.title.Title
-import ru.my_career.my_career_api.my_career_api.common.validators.value_of_enum.ValueOfEnum
+import ru.my_career.my_career_api.my_career_api._common.validators.text.MediumText
+import ru.my_career.my_career_api.my_career_api._common.validators.text.ShortText
+import ru.my_career.my_career_api.my_career_api._common.validators.value_of_enum.ValueOfEnum
 import ru.my_career.my_career_api.my_career_api.roles.CommonRoleId
 
 data class CreateRoleDto(
 //    val companyId: String,
 
-    @field:Title
+    @field:ShortText
     val title: String,
 
-    @field:Description
+    @field:MediumText
     val description: String,
 
     val permissions: Collection<String>,

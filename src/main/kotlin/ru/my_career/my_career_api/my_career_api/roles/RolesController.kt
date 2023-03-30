@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import ru.my_career.my_career_api.my_career_api.common.entities.ApiResponse
-import ru.my_career.my_career_api.my_career_api.common.entities.ResponseStatus
+import ru.my_career.my_career_api.my_career_api._common.entities.ApiResponse
+import ru.my_career.my_career_api.my_career_api._common.entities.ResponseStatus
 import ru.my_career.my_career_api.my_career_api.roles.dto.CreatePermissionDto
 import ru.my_career.my_career_api.my_career_api.roles.dto.CreateRoleDto
 import ru.my_career.my_career_api.my_career_api.roles.models.Permission
